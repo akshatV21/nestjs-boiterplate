@@ -35,4 +35,8 @@ export class AuthService {
 
     return { user: rest, token }
   }
+
+  async getUserById(id: string) {
+    return this.UserModel.findById(id)
+  }
 }
