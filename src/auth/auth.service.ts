@@ -19,7 +19,7 @@ export class AuthService {
     const user = new this.UserModel<User>(registerDto)
     await user.save()
 
-    const { password, rest } = user._doc
+    const { password, ...rest } = user._doc
     return rest
   }
 
@@ -31,7 +31,7 @@ export class AuthService {
     if (!passwordMatches) throw new BadRequestException('Invalid password provided.')
 
     const token = sign({ id: registeredUser.id }, this.configService.get('JWT_SECRET'), { expiresIn: '24h' })
-    const { password, rest } = registeredUser._doc
+    const { password, ...rest } = registeredUser._doc
 
     return { user: rest, token }
   }

@@ -5,7 +5,7 @@ import helmet from 'helmet'
 import * as morgan from 'morgan'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule, { cors: { origin: '*' } })
 
   const configService = app.get<ConfigService>(ConfigService)
   const PORT = configService.get('PORT')
